@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
@@ -10,16 +10,16 @@ public class PlayerScript : MonoBehaviour {
 		jumpTimer = 0.5f;
 	}
 
-	//Sprawdza czy obiekt jest na ziemi
+	//Sprawdza czy objekt jest na ziemi
 	bool IsGrounded() {
 		return Physics2D.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f);
 	}
-	bool Cooldown(float time, float maxTime){
-		if (time <= 0) {
-			time = maxTime;
+	bool Cooldown(){
+		if (jumpTimer <= 0) {
+			jumpTimer = 0.5f;
 						return true;
 				}else {
-			time -= Time.deltaTime;
+			jumpTimer -= Time.deltaTime;
 						return false;
 				}
 						
@@ -27,7 +27,7 @@ public class PlayerScript : MonoBehaviour {
 		}
 	
 	void Update () {
-		if (IsGrounded () && Cooldown (jumpTimer, 0.5f)) {
+		if (IsGrounded () && Cooldown ()) {
 			rigidbody2D.AddForce((Vector2.up + Vector2.right) * 100);
 				} else if (!IsGrounded ()) {
 			jumpTimer = 0.5f;
