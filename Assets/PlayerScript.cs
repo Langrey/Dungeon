@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour {
 		jumpTimer = 0.5f;
 	}
 
-	//Sprawdza czy objekt jest na ziemi
+	//Sprawdza czy obiekt jest na ziemi
 	bool IsGrounded() {
 		return Physics2D.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f);
 	}
