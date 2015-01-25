@@ -14,12 +14,12 @@ public class PlayerScript : MonoBehaviour {
 	bool IsGrounded() {
 		return Physics2D.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f);
 	}
-	bool Cooldown(){
-		if (jumpTimer <= 0) {
-			jumpTimer = 0.5f;
+	bool Cooldown(float time, float maxTime){
+		if (time <= 0) {
+			time = maxTime;
 						return true;
 				}else {
-			jumpTimer -= Time.deltaTime;
+			time -= Time.deltaTime;
 						return false;
 				}
 						
@@ -27,7 +27,7 @@ public class PlayerScript : MonoBehaviour {
 		}
 	
 	void Update () {
-		if (IsGrounded () && Cooldown ()) {
+		if (IsGrounded () && Cooldown (jumpTimer, 0.5f)) {
 			rigidbody2D.AddForce((Vector2.up + Vector2.right) * 100);
 				} else if (!IsGrounded ()) {
 			jumpTimer = 0.5f;
